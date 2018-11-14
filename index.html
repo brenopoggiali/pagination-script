@@ -1,0 +1,847 @@
+
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Pagination simplified example</title>
+	
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  </head>
+
+	<body>
+
+<main>
+
+	<section>
+		<div class="container">
+			<div class="row">
+				<div class="col-12">
+					<div id="filtros" class="form-inline float-right mb-3">
+						<div class="mr-3">
+							Mercado
+							<div id="mercado" class="btn-group btn-group-toggle" data-toggle="buttons">
+							  <label class="btn btn-sm btn-outline-secondary active">
+							    <input type="radio" name="options" value="todos-mercados" id="todos-mercados" autocomplete="off" checked>Todos
+							  </label>
+							  <label class="btn btn-sm btn-outline-secondary">
+							    <input type="radio" name="options" value="B2B" id="b2b" autocomplete="off">B2B
+							  </label>
+							  <label class="btn btn-sm btn-outline-secondary">
+							    <input type="radio" name="options" value="B2C" id="b2c" autocomplete="off">B2C
+							  </label>
+							</div>
+						</div>
+						<div class="">
+							Segmento
+							<select id="segmento" class="form-control form-control-sm">
+								<option value="Todos" selected>Todos</option>
+								<option value="Agência">Agência de Marketing</option>
+								<option value="Audiovisual">Audiovisual</option>
+								<option value="Automação">Automação Comercial</option>
+								<option value="Comunicação">Comunicação</option>
+								<option value="Construção">Construção e Imóveis</option>
+								<option value="Consultoria">Consultoria</option>
+								<option value="Design">Design</option>
+								<option value="E-commerce">E-commerce</option>
+								<option value="Educação">Educação</option>
+								<option value="Civil">Engenharia Civil</option>
+								<option value="Finanças">Finanças</option>
+								<option value="Indústria">Indústria e Manufatura</option>
+								<option value="Internet">Internet</option>
+								<option value="Judiciário">Judiciário</option>
+								<option value="Marketing">Marketing</option>
+								<option value="Digital">Marketing Digital</option>
+								<option value="Saúde">Saúde</option>
+								<option value="Software">Software</option>
+							</select>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container-fluid">
+			<div id="cases" class="row">
+				<div id="error-message" class="col-12 text-center mt-5 mb-5 d-none">
+					<h3>Não encontramos resultados para o filtro que você selecionou =/</h3>
+				</div>
+				<div class="card-columns" style="column-count: 4;">
+					<div id="1" class="card bg-light mb-3 filtrado searched Grande B2C Agência de Marketing Saúde ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 1									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing Saúde
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="2" class="card bg-light mb-3 filtrado searched Pequena B2B-B2C Finanças ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 2									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B-B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Finanças
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="3" class="card bg-light mb-3 filtrado searched Média B2B Software ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 3									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Software
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="4" class="card bg-light mb-3 filtrado searched Pequena B2B Consultoria ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 4									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Consultoria
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="5" class="card bg-light mb-3 filtrado searched Pequena B2B-B2C Consultoria Educação ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 5									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B-B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Consultoria Educação
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="6" class="card bg-light mb-3 filtrado searched B2C Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 6									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="7" class="card bg-light mb-3 filtrado searched Grande B2C Finanças ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 7									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Finanças
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="8" class="card bg-light mb-3 filtrado searched Grande Educação ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 8									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Educação
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="9" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 9									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="10" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 10									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="11" class="card bg-light mb-3 filtrado searched Média B2B Automação Comercial ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 11									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Automação Comercial
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="12" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 12									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="13" class="card bg-light mb-3 filtrado searched Média B2B Indústria e Manufatura ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 13									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Indústria e Manufatura
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="14" class="card bg-light mb-3 filtrado searched Média B2C Educação ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 14									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Educação
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="15" class="card bg-light mb-3 filtrado searched Pequena B2B Varejo ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 15									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Varejo
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="16" class="card bg-light mb-3 filtrado searched Pequena B2B Finanças ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 16									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Finanças
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="17" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 17									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="18" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 18									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="19" class="card bg-light mb-3 filtrado searched Pequena B2C E-commerce ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 19									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: E-commerce
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="20" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 20									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="21" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 21									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="22" class="card bg-light mb-3 filtrado searched Pequena B2B Software e Cloud ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 22									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Software e Cloud
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="23" class="card bg-light mb-3 filtrado searched Pequena B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 23									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="24" class="card bg-light mb-3 filtrado searched Pequena B2C Construção e Imóveis ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 24									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Construção e Imóveis
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="25" class="card bg-light mb-3 filtrado searched Grande B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 25									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="26" class="card bg-light mb-3 filtrado searched B2B Marketing Digital ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 26									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Marketing Digital
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="27" class="card bg-light mb-3 filtrado searched Pequena B2B Consultoria ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 27									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Consultoria
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="28" class="card bg-light mb-3 filtrado searched Pequena B2B Saúde ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 28									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Saúde
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="29" class="card bg-light mb-3 filtrado searched Pequena B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 29									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="30" class="card bg-light mb-3 filtrado searched Média B2B-B2C Indústria e Manufatura ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 30									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B-B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Indústria e Manufatura
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="31" class="card bg-light mb-3 filtrado searched B2B Software ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 31									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Software
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="32" class="card bg-light mb-3 filtrado searched Pequena B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 32									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="33" class="card bg-light mb-3 filtrado searched Grande B2C Educação ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 33									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Educação
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="34" class="card bg-light mb-3 filtrado searched B2B Construção e Imóveis ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 34									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Construção e Imóveis
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="35" class="card bg-light mb-3 filtrado searched Grande B2B E-commerce ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 35									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: E-commerce
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="36" class="card bg-light mb-3 filtrado searched Pequena B2B B2C Terceiro Setor/ONG ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 36									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Terceiro Setor/ONG
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="37" class="card bg-light mb-3 filtrado searched Pequena B2C E-commerce ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 37									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: E-commerce
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="38" class="card bg-light mb-3 filtrado searched Pequena B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 38									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="39" class="card bg-light mb-3 filtrado searched Pequena B2C E-commerce ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 39									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: E-commerce
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="40" class="card bg-light mb-3 filtrado searched Grande B2B Turismo e Lazer ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 40									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Turismo e Lazer
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="41" class="card bg-light mb-3 filtrado searched Pequena B2B Software e Cloud ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 41									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Software e Cloud
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="42" class="card bg-light mb-3 filtrado searched B2B Agência de Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 42									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Agência de Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="43" class="card bg-light mb-3 filtrado searched Média B2C Saúde ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 43									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Média empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Saúde
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="44" class="card bg-light mb-3 filtrado searched Grande B2B Software ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 44									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Software
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="45" class="card bg-light mb-3 filtrado searched Grande B2B B2C Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 45									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="46" class="card bg-light mb-3 filtrado searched Pequena B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 46									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="47" class="card bg-light mb-3 filtrado searched Pequena B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 47									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="48" class="card bg-light mb-3 filtrado searched Pequena B2C E-commerce ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 48									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: E-commerce
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="49" class="card bg-light mb-3 filtrado searched Grande B2B Consultoria ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 49									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Consultoria
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="50" class="card bg-light mb-3 filtrado searched Grande B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 50									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="51" class="card bg-light mb-3 filtrado searched Grande B2C Engenharia Civil ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 51									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Engenharia Civil
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="52" class="card bg-light mb-3 filtrado searched Grande B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 52									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Grande empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="53" class="card bg-light mb-3 filtrado searched Pequena B2B Design ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 53									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Design
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="54" class="card bg-light mb-3 filtrado searched Pequena B2B B2C Internet ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 54									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Internet
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="55" class="card bg-light mb-3 filtrado searched Pequena B2B B2C Finanças ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 55									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Finanças
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="56" class="card bg-light mb-3 filtrado searched Pequena B2B B2C Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 56									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="57" class="card bg-light mb-3 filtrado searched Pequena B2B Comunicação ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 57									
+									<i class="material-icons">business</i> <b>Tamanho</b>: Pequena empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Comunicação
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="58" class="card bg-light mb-3 filtrado searched B2B B2C Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 58									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="59" class="card bg-light mb-3 filtrado searched B2B B2C Audiovisual ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 59									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Audiovisual
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="60" class="card bg-light mb-3 filtrado searched B2B Tecnologia ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 60									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Tecnologia
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="61" class="card bg-light mb-3 filtrado searched B2B Marketing ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 61									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Marketing
+ 								</small>
+							</p>
+						</div>
+					</div>
+					<div id="62" class="card bg-light mb-3 filtrado searched B2B B2C Judiciário ">
+						<div class="card-body">
+							<p>
+								<small>
+									<i class="material-icons">fingerprint</i> <b>Id: </b>: 62									
+									<i class="material-icons">business</i> <b>Tamanho</b>:  empresa
+									<i class="material-icons">store</i> <b>Mercado</b>: B2B B2C 									
+									<i class="material-icons">local_offer</i> <b>Segmento</b>: Judiciário
+ 								</small>
+							</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+				<div class="col-12 text-center mt-3 mb-5">
+					<nav aria-label="...">
+						<ul class="pagination justify-content-center">
+							<li id="prev" class="page-item disabled fixed">
+								 <button class="page-link">Previous</button>
+							</li>
+							<li id="number-of-pages" class="fixed"></li>
+							    </li>
+							<li id="next" class="page-item fixed">
+								<button class="page-link">Next</button>
+							</li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+		</div>
+	</section>
+</main>
+
+<!-- Bootstrap -->
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+<!-- Personalizado JS -->
+<script type="text/javascript" src="pagination.js"></script>
+</body>
+</html>
