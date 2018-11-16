@@ -74,9 +74,10 @@ var currentPage = 1;
 	// updating env variables values 
 		var firstFiltered = parseInt($('.searched.filtrado').attr('id')); //first card filtered id - used in previous button
 		//last card filtered id - used in next button
-			for (lastFiltered = 0; lastFiltered < $(".card").length; lastFiltered++) {
-				if($('#' + lastFiltered).is('.searched.filtrado')){
-				}				
+			for (i = 0; i <= $(".card").length; i++) {
+				if($('#' + i).is('.searched.filtrado')){
+					lastFiltered = i;
+				}		
 			}
 		postsFiltered = $('.searched.filtrado').length; //number of posts that are filtered
 		firstOfPage = parseInt($(".searched.filtrado:visible").attr("id")); //first filtered that is visible
@@ -95,6 +96,7 @@ var currentPage = 1;
 			$("#prev").addClass("disabled");
 			$("#prev").prop("disabled",true);
 		}
+		console.log("ultimo = " + ultimo + " lastFiltered = " + lastFiltered);
 	// if inside last page
 		if(ultimo < lastFiltered){
 			$("#next").removeClass("disabled");
