@@ -30,13 +30,14 @@ var currentPage = 1;
 
 		//Listing 'postsPerPage' posts per page
 		$('.searched' + '.filtrado').hide();
-		for (ultimo = 0, j = postsPerPage; ultimo <= $(".card").length  && j>0 ; ultimo++) {
+		for (ultimo = 0, j = postsPerPage; ultimo < $(".card").length  && j>0 ; ) {
+			ultimo++;
 			if($('#' + ultimo).is('.searched.filtrado')){
 				$("#" + ultimo).show();
 				j--;
-				ultimo = ultimo;
 			}				
 		}
+		console.log("listing postsPerPage 'mercado' ultimo = " + ultimo);
 	});
 
 /*When click at 'segmento' filter */
@@ -60,26 +61,27 @@ var currentPage = 1;
 
 	  //Listing 'postsPerPage' posts per page
 		$('.searched' + '.filtrado').hide();
-		for (ultimo = 0, j = postsPerPage; ultimo <= $(".card").length  && j>0 ; ultimo++) {
+		for (ultimo = 0, j = postsPerPage; ultimo < $(".card").length  && j>0 ; ) {
+			ultimo++;
 			if($('#' + ultimo).is('.searched.filtrado')){
 				$("#" + ultimo).show();
 				j--;
-				ultimo = ultimo;
 			}				
 		}
+		console.log("listing postsPerPage 'segmento' ultimo = " + ultimo);
 	});
 
 /*When any click happen at the page */
 	$(document).click(function(){
 	// updating env variables values 
-		var firstFiltered = $('.searched.filtrado').attr('id'); //first card filtered id - used in previous button
+		var firstFiltered = parseInt($('.searched.filtrado').attr('id')); //first card filtered id - used in previous button
 		//last card filtered id - used in next button
-			for (lastFiltered = 0; lastFiltered <= $(".card").length; lastFiltered++) {
+			for (lastFiltered = 0; lastFiltered < $(".card").length; lastFiltered++) {
 				if($('#' + lastFiltered).is('.searched.filtrado')){
 				}				
 			}
 		postsFiltered = $('.searched.filtrado').length; //number of posts that are filtered
-		firstOfPage = $(".searched.filtrado:visible").attr("id"); //first filtered that is visible
+		firstOfPage = parseInt($(".searched.filtrado:visible").attr("id")); //first filtered that is visible
 
 		//printing the pages number in pagination 
 		$("ul.pagination > li:not(.fixed)").remove();
@@ -112,8 +114,8 @@ var currentPage = 1;
 /* When click previous button */
 	$(document).on('click','#prev', function() {
 		currentPage--;
-		for (i = firstOfPage, j = postsPerPage; i <= ultimo; i++) {
-			if($('#' + i).is('.searched.filtrado') && j>0){
+		for (i = firstOfPage, j = postsPerPage; i <= ultimo && j>0; i++) {
+			if($('#' + i).is('.searched.filtrado')){
 				$("#" + i).hide();
 				j--;
 			}				
@@ -125,24 +127,26 @@ var currentPage = 1;
 				j--;
 			}				
 		}
+		console.log("#prev click ultimo = " + ultimo);
 	});
 /* When click next button */
 	$(document).on('click','#next', function() {
 		currentPage++;
 		$("#prev").removeClass("disabled");
-		for (i = firstOfPage, j = postsPerPage; i <= ultimo; i++) {
-			if($('#' + i).is('.searched.filtrado') && j>0){
+		for (i = firstOfPage, j = postsPerPage; i <= ultimo && j>0; i++) {
+			if($('#' + i).is('.searched.filtrado')){
 				$("#" + i).hide();
 				j--;
 			}				
 		}
-		for (i = ultimo+1, j = postsPerPage; i <= $(".card").length; i++) {
-			if($('#' + i).is('.searched.filtrado') && j>0){
+		for (i = ultimo+1, j = postsPerPage; i <= $(".card").length && j>0; i++) {
+			if($('#' + i).is('.searched.filtrado')){
 				$("#" + i).show();
 				j--;
 				ultimo = i;
 			}				
 		}
+		console.log("#next click ultimo = " + ultimo);
 	});
 /* When click pagination numbers button */
 	$(document).on('click','.page-number', function(e) {
