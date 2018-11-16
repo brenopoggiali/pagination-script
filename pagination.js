@@ -37,7 +37,6 @@ var currentPage = 1;
 				j--;
 			}				
 		}
-		console.log("listing postsPerPage 'mercado' ultimo = " + ultimo);
 	});
 
 /*When click at 'segmento' filter */
@@ -68,7 +67,6 @@ var currentPage = 1;
 				j--;
 			}				
 		}
-		console.log("listing postsPerPage 'segmento' ultimo = " + ultimo);
 	});
 
 /*When any click happen at the page */
@@ -127,7 +125,6 @@ var currentPage = 1;
 				j--;
 			}				
 		}
-		console.log("#prev click ultimo = " + ultimo);
 	});
 /* When click next button */
 	$(document).on('click','#next', function() {
@@ -146,7 +143,6 @@ var currentPage = 1;
 				ultimo = i;
 			}				
 		}
-		console.log("#next click ultimo = " + ultimo);
 	});
 /* When click pagination numbers button */
 	$(document).on('click','.page-number', function(e) {
