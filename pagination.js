@@ -1,5 +1,5 @@
 $( document ).ready(function() {
-var postsPerPage = 8;
+var postsPerPage = 12;
 
 var i, j, firstOfPage, postsFiltered, firstFiltered, lastFiltered;
 var ultimo = postsPerPage;
@@ -85,7 +85,7 @@ var currentPage = 1;
 		//printing the pages number in pagination 
 		$("ul.pagination > li:not(.fixed)").remove();
 		for (var i = 0; i < postsFiltered; i += postsPerPage) {
-			$("#number-of-pages").before('<li class="page-item"><button class="page-link page-number">'+ (parseInt(i/postsPerPage)+1) +'</button></li>');
+			$("#number-of-pages").before('<li class="page-item"><a href="#"><button class="page-link page-number">'+ (parseInt(i/postsPerPage)+1) +'</button></a></li>');
 		}
 
 	// if inside first page
@@ -96,7 +96,6 @@ var currentPage = 1;
 			$("#prev").addClass("disabled");
 			$("#prev").prop("disabled",true);
 		}
-		console.log("ultimo = " + ultimo + " lastFiltered = " + lastFiltered);
 	// if inside last page
 		if(ultimo < lastFiltered){
 			$("#next").removeClass("disabled");
@@ -108,7 +107,9 @@ var currentPage = 1;
 		
 	//updating current page color at pagination
 		$("ul.pagination > li").removeClass("active");
-		$("ul.pagination > li:contains('" + currentPage + "')").addClass("active");
+		$("ul.pagination > li").filter(function(){ 
+			return $(this).text() == currentPage;
+		}).addClass("active");
 	});
 
 /* When click previous button */
